@@ -1,26 +1,17 @@
 CC = gcc
-CFLAGS = -Wno-implicit-function-declaration
-EXEC = chess
+CFLAGS = -g -Wall -I./src/board -I./src/game -I./src/pieces -I./src/util
 
-main.o: main.c board.h game.h pieces.h chess.h
-	$(CC) $(CFLAGS) -c main.c
+SRC = src/board/board.c src/game/game.c src/pieces/pieces.c src/util/util.c
+OBJ = $(SRC:.c=.o)
+TARGET = chess_game
 
-board.o: board.c board.h pieces.h
-	$(CC) $(CFLAGS) -c board.c
+all: $(TARGET)
 
-game.o: game.c game.h board.h pieces.h util.c chess.h
-	$(CC) $(CFLAGS) -c game.c
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET)
 
-pieces.o: pieces.c pieces.h
-	$(CC) $(CFLAGS) -c pieces.c
-
-util.o: util.c
-	$(CC) $(CFLAGS) -c util.c
-
-$(EXEC): main.o board.o game.o pieces.o util.o
-	$(CC) $(CFLAGS) main.o board.o game.o pieces.o util.o -o $(EXEC)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o $(EXEC)
-
-.PHONY: all clean
+	rm -f $(OBJ) $(TARGET)

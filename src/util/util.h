@@ -3,6 +3,4 @@
 
 char *get_string(const char *prompt);
 
-int len(const char *string);
-
 #endif

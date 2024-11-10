@@ -12,6 +12,7 @@ typedef struct {
     piece_type type;
     white_or_black color;
     bool first_turn;
+    bool threatened;
 } chess_piece;
 
 char get_piece(chess_piece piece);

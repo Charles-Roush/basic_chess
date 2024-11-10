@@ -71,6 +71,7 @@ chess_piece init_board(chess_piece board[BOARD_SIZE][BOARD_SIZE]) {
         board[board_y][board_x].type = PAWN;
         board[board_y][board_x].first_turn = true;
         board[board_y][board_x].color = WHITE;
+        printf("Board y = %i\n Board x = %i\n Board color = %d\n", board_y, board_x, board[board_y][board_x].color);
     }
 
     board_y = 7;
@@ -104,6 +105,7 @@ chess_piece init_board(chess_piece board[BOARD_SIZE][BOARD_SIZE]) {
         board[board_y][board_x].type = PAWN;
         board[board_y][board_x].first_turn = true;
         board[board_y][board_x].color = BLACK;
+        printf("Board y = %i\n Board x = %i\n Board color = %d\n", board_y, board_x, board[board_y][board_x].color);
     }
 }
 
