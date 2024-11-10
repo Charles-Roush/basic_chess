@@ -1,8 +1,9 @@
 #ifndef PIECES_H
 #define PIECES_H
 
-#include "chess.h"
+#include "turn.h"
 #include "stdbool.h"
+#include "turn.h"
 
 typedef enum {
     EMPTY, PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING

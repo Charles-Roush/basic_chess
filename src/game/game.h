@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "board.h"
-#include "chess.h"
+#include "turn.h"
 #include "pieces.h"
 
 typedef struct
@@ -28,5 +28,8 @@ vector2 get_pos(char *input);
 
 bool check_valid_move(vector2 before_pos, vector2 after_pos, white_or_black turn, chess_piece board[BOARD_SIZE][BOARD_SIZE]);
 
+bool check_valid_straight(vector2 before_pos, vector2 after_pos, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change, vector2 difference);
+
+bool check_valid_diagonal(vector2 before_pos, vector2 after_pos, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change, vector2 difference);
 #endif
 

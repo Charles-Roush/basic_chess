@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include "game.h"
-#include "chess.h"
+#include  "game.h"
+#include "turn.h"
 #include "board.h"
 #include "pieces.h"
 

@@ -7,7 +7,8 @@
 #include "board.h"
 #include "pieces.h"
 #include "util.h"
-#include "chess.h"
+#include "turn.h"
+#include "checks.h"
 
 bool check_valid_straight(vector2 before_pos, vector2 after_pos, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change, vector2 difference)
 {
@@ -41,8 +42,8 @@ bool check_valid_straight(vector2 before_pos, vector2 after_pos, chess_piece boa
 }
 
 
-bool check_valid_diagonal(vector2 before_pos, vector2 after_pos, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change, vector2 difference) {
-    
+bool check_valid_diagonal(vector2 before_pos, vector2 after_pos, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change, vector2 difference) 
+{ 
     if (abs(difference.x) != abs(difference.y))
     {
         printf("Not diagonal"); 
@@ -59,45 +60,6 @@ bool check_valid_diagonal(vector2 before_pos, vector2 after_pos, chess_piece boa
         }
     }
     return true; 
-}
-
-bool check_pawn(chess_piece before_piece, chess_piece after_piece, vector2 before_pos, vector2 after_pos, vector2 difference, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change)
-{
-    //check if the move is valid
-        //check if its moving diagonally or forward
-            // if diagonally makes sure their is a something there
-            // if forward makes sure nothing is to block it
-                //makes sure using check_valid_x which loops through the x's inbetween and makes sure their isnt any piece
-
-    // if ((before_piece.color == WHITE && change.y != -1) || (before_piece.color == BLACK && change.y != 1)) {
-    // printf("Moving wrong way\n");
-    // return false;
-    // }
-
-    
-    if (abs(difference.y) > 2){
-    return false;
-    }
-    
-    if (before_piece.first_turn == false && abs(difference.y > 1)){
-    return false;
-    }
-
-    
-    if (difference.x == 0){
-        printf("checking straight\n");
-        return check_valid_straight(before_pos, after_pos, board, change, difference);
-    }
-    else{
-        printf("checking diagonally\n");
-        if (after_piece.type == EMPTY)
-        {
-            printf("pawns can only move diagonally to take an enemy piece.\n");
-            return false;
-        }
-        return check_valid_diagonal(before_pos, after_pos, board, change, difference);
-    }
-
 }
 
 
