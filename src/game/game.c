@@ -10,59 +10,6 @@
 #include "turn.h"
 #include "checks.h"
 
-bool check_valid_straight(vector2 before_pos, vector2 after_pos, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change, vector2 difference)
-{
-    white_or_black before_color = board[before_pos.x][before_pos.y].color;
-    if (change.y != 0)
-    {
-        for (int y = before_pos.y + change.y, x = before_pos.x; y != after_pos.y; y += change.y)
-        {
-            if (board[y][x].color == before_color && board[y][x].type != EMPTY)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    else if (change.x != 0)
-    {
-        for (int x = before_pos.x + change.x, y = before_pos.y; y != after_pos.x; y += change.x)
-        {
-            if (board[y][x].color == before_color && board[y][x].type != EMPTY)
-            {
-                return false;
-            }
-
-        }
-        return true;
-    }
-
-    else return false;
-}
-
-
-bool check_valid_diagonal(vector2 before_pos, vector2 after_pos, chess_piece board[BOARD_SIZE][BOARD_SIZE], vector2 change, vector2 difference) 
-{ 
-    if (abs(difference.x) != abs(difference.y))
-    {
-        printf("Not diagonal"); 
-        return false;
-    } 
-    white_or_black before_color = board[before_pos.y][before_pos.x].color;
-    
-    for (int x = before_pos.x + change.x, y = before_pos.y + change.y; x != after_pos.x && y != after_pos.y; x += change.x, y += change.y) 
-    {
-        if (board[y][x].color == before_color && board[y][x].type != EMPTY) 
-        {
-            printf("pieces inbetween"); 
-            return false; 
-        }
-    }
-    return true; 
-}
-
-
 bool check_valid_move(vector2 before_pos, vector2 after_pos, white_or_black turn, chess_piece board[BOARD_SIZE][BOARD_SIZE])
 {
 
@@ -121,31 +68,37 @@ bool check_valid_move(vector2 before_pos, vector2 after_pos, white_or_black turn
         case PAWN:
             printf("checking pawn\n");
             if (check_pawn(before_piece, after_piece, before_pos, after_pos, difference, board, change)){
+                printf("pawn");
                 return true;
             }
             else return false;
         case ROOK:
-            if (check_rook(before_piece, after_piece, before_pos, after_pos, difference, board, change)){
+            printf("rook\n");
+            if (check_rook(before_pos, after_pos, difference, board, change)){
                 return true;
             }
             else return false;
         case KNIGHT:
-            if (check_knight(before_piece, after_piece, before_pos, after_pos, difference, board, change)){
+            printf("knight\n");
+            if (check_knight(difference)){
                 return true;
             }
             else return false;
         case BISHOP:
-            if (check_bishop(before_piece, after_piece, before_pos, after_pos, difference, board, change)){
+            printf("bishop\n");
+            if (check_bishop(before_pos, after_pos, difference, board, change)){
                 return true;
             }
             else return false;
         case QUEEN:
-            if (check_queen(before_piece, after_piece, before_pos, after_pos, difference, board, change)){
+            printf("queen\n");
+            if (check_queen(before_pos, after_pos, difference, board, change)){
                 return true;
             }
             else return false;
         case KING:
-            if (check_king(before_piece, after_piece, before_pos, after_pos, difference, board, change)){
+            printf("king\n");
+            if (check_king(difference)){
                 return true;
             }
             else return false;
